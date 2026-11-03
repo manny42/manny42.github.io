@@ -1,0 +1,14 @@
+{%- comment -%}
+  Talk cover: the talk image if there is one, otherwise a generated typographic cover.
+  Params: talk, duration (optional, shown on video covers)
+{%- endcomment -%}
+{%- assign c = include.talk -%}
+<div class="cover">
+  {%- if c.image %}
+  <img class="cover-img" src="{{ c.image | relative_url }}" alt="" width="1280" height="720" loading="lazy">
+  {%- endif %}
+  <div class="top"><span>{{ c.ref }}</span><span>{{ c.event }} · {{ c.date | date: "%Y" }}</span></div>
+  <div class="title">{{ c.title }}</div>
+  {%- if include.duration %}<span class="dur">{{ include.duration }}</span>{% endif %}
+  {%- if c.video %}<span class="play"></span>{% endif %}
+</div>

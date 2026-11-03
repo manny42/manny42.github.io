@@ -1,0 +1,16 @@
+{%- comment -%}
+  Computes the homepage numbers from the content files, counting each `ref` once
+  so a talk or course that exists in both languages isn't counted twice.
+  Sets stat_talks, stat_courses, stat_students.
+{%- endcomment -%}
+{%- assign stat_talks = site.talks | map: "ref" | uniq | size -%}
+{%- assign stat_courses = site.courses | map: "ref" | uniq | size -%}
+{%- assign stat_students = 0 -%}
+{%- assign seen = "|" -%}
+{%- for c in site.courses -%}
+  {%- assign key = c.ref | append: "|" | prepend: "|" -%}
+  {%- unless seen contains key -%}
+    {%- assign seen = seen | append: c.ref | append: "|" -%}
+    {%- assign stat_students = stat_students | plus: c.students -%}
+  {%- endunless -%}
+{%- endfor -%}

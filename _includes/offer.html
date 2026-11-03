@@ -1,0 +1,20 @@
+{%- comment -%} Two-column offer (companies / schools) from offer.audiences in the language file. {%- endcomment -%}
+  <div class="offer">
+    {%- for a in t.offer.audiences %}
+    <article class="offer-card">
+      <div class="offer-head"><span class="mono dim">{{ a.ref }}</span><h3>{{ a.title }}</h3></div>
+      <p class="pitch">{{ a.pitch }}</p>
+      <div class="offer-lists">
+        <div>
+          <h4>{{ t.labels.offer_formats }}</h4>
+          <ul>{% for f in a.formats %}<li>{{ f }}</li>{% endfor %}</ul>
+        </div>
+        <div>
+          <h4>{{ t.labels.offer_outcomes }}</h4>
+          <ul>{% for o in a.outcomes %}<li>{{ o }}</li>{% endfor %}</ul>
+        </div>
+      </div>
+      <a class="btn btn-primary" href="{% include mailto.html subject=a.cta.subject %}">{{ a.cta.label }} →</a>
+    </article>
+    {%- endfor %}
+  </div>

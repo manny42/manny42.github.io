@@ -1,0 +1,12 @@
+{%- assign r = include.course -%}
+{%- assign first_material = r.materials | first -%}
+<li><div class="row">
+  <span class="mono when">{{ r.ref }} · {{ r.period }}</span>
+  <div><h3><a href="{{ r.url | relative_url }}">{{ r.title }}</a></h3><span class="dim">{{ r.institution }}</span></div>
+  <span class="dim where">{{ r.format }}{% if r.students %} · {{ r.students }} {{ t.labels.students }}{% endif %}</span>
+  {%- if first_material %}
+  <a class="btn btn-sm" href="{{ first_material.url | relative_url }}">{{ first_material.label }}</a>
+  {%- else %}
+  <a class="btn btn-sm" href="{{ r.url | relative_url }}">{{ t.labels.notes }}</a>
+  {%- endif %}
+</div></li>

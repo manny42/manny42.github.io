@@ -1,0 +1,87 @@
+---
+layout: base
+---
+{%- assign t = site.data[page.lang] -%}
+{%- assign talks = site.talks | where: "lang", page.lang | sort: "date" -%}
+{%- for x in talks -%}
+  {%- if x.url == page.url -%}
+    {%- assign i = forloop.index0 -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if i > 0 %}{% assign prev_i = i | minus: 1 %}{% assign prev_talk = talks[prev_i] %}{% endif -%}
+{%- assign next_i = i | plus: 1 -%}
+{%- assign next_talk = talks[next_i] -%}
+
+<div class="crumbs pad"><a href="{{ t.urls.talks | relative_url }}">{{ t.labels.back_to_talks }}</a></div>
+
+<section class="talk-head">
+  <div class="pad">
+    <span class="mono dim">{{ page.ref }}{% if page.kind %} · {{ page.kind }}{% endif %}{% if page.language %} · {{ page.language }}{% endif %}</span>
+    <h1>{{ page.title }}</h1>
+    {%- if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
+  </div>
+  <div class="pad">
+    <table class="specs">
+      <caption>{{ t.labels.specifications }}</caption>
+      <tr><th>{{ t.labels.event }}</th><td><b>{% if page.event_url %}<a href="{{ page.event_url }}">{{ page.event }}</a>{% else %}{{ page.event }}{% endif %}</b></td></tr>
+      <tr><th>{{ t.labels.date }}</th><td>{{ page.date | date: "%Y-%m-%d" }}</td></tr>
+      {%- if page.duration %}<tr><th>{{ t.labels.format }}</th><td>{{ page.duration }}</td></tr>{% endif %}
+      {%- if page.audience %}<tr><th>{{ t.labels.audience }}</th><td class="num">~{{ page.audience }}</td></tr>{% endif %}
+      {%- if page.rating %}<tr><th>{{ t.labels.rating }}</th><td class="num">{{ page.rating }} <span class="mono dim">/ 5</span></td></tr>{% endif %}
+    </table>
+  </div>
+</section>
+
+{%- if page.video %}
+<!-- Lite embed: a static cover until clicked, so the page loads no YouTube JS -->
+<div class="video" role="button" tabindex="0" data-yt="{{ page.video }}" aria-label="{{ t.labels.play }}">
+  {% include cover.html talk=page duration=page.video_length %}
+</div>
+{%- endif %}
+
+<div class="layout">
+  <article class="prose">
+    {{ content }}
+  </article>
+
+  <aside>
+    {%- if page.video or page.slides or page.code %}
+    <div class="panel">
+      <h3>{{ t.labels.resources }}</h3>
+      {%- if page.video %}<a class="resource" href="https://www.youtube.com/watch?v={{ page.video }}"><span class="ic">▶</span><span>{{ t.labels.video }}<small>{{ t.labels.watch_on_youtube }}</small></span></a>{% endif %}
+      {%- if page.slides %}<a class="resource" href="{{ page.slides | relative_url }}"><span class="ic">PDF</span><span>{{ t.labels.slides }}<small>{{ page.slides | split: "/" | last }}</small></span></a>{% endif %}
+      {%- if page.code %}<a class="resource" href="{{ page.code }}"><span class="ic">&lt;/&gt;</span><span>{{ t.labels.code }}<small>{{ page.code | remove: "https://" }}</small></span></a>{% endif %}
+    </div>
+    {%- endif %}
+    {%- if page.tags.size > 0 %}
+    <div class="panel">
+      <h3>{{ t.labels.topics }}</h3>
+      <div class="tags">{% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}</div>
+    </div>
+    {%- endif %}
+    {%- if page.also_given.size > 0 %}
+    <div class="panel">
+      <h3>{{ t.labels.revision_history }}</h3>
+      <table class="history">
+        <tr><th>{{ t.labels.date }}</th><th>{{ t.labels.event }}</th></tr>
+        <tr><td>{{ page.date | date: "%m/%Y" }}</td><td>{{ page.event }}{% if page.language %} ({{ page.language }}){% endif %}</td></tr>
+        {%- for g in page.also_given %}
+        <tr><td>{{ g.date | date: "%m/%Y" }}</td><td>{{ g.event }}{% if g.language %} ({{ g.language }}){% endif %}</td></tr>
+        {%- endfor %}
+      </table>
+    </div>
+    {%- endif %}
+    <div class="panel">
+      <a class="btn btn-primary" href="{% include mailto.html subject=page.title %}">{{ t.labels.invite_talk }}</a>
+    </div>
+  </aside>
+</div>
+
+{%- if prev_talk or next_talk %}
+<nav class="pager" aria-label="{{ t.labels.all_talks }}">
+  {%- if prev_talk %}<a href="{{ prev_talk.url | relative_url }}"><span class="mono dim">{{ t.labels.previous }} · {{ prev_talk.ref }}</span><strong>{{ prev_talk.title }}</strong></a>{% else %}<span></span>{% endif %}
+  {%- if next_talk %}<a href="{{ next_talk.url | relative_url }}"><span class="mono dim">{{ next_talk.ref }} · {{ t.labels.next }}</span><strong>{{ next_talk.title }}</strong></a>{% endif %}
+</nav>
+{%- endif %}
+
+{% include newsletter.html eyebrow=t.newsletter.after_talk_eyebrow title=t.newsletter.after_talk_title %}

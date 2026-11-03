@@ -1,0 +1,47 @@
+---
+layout: base
+---
+{%- assign t = site.data[page.lang] -%}
+<div class="crumbs pad"><a href="{{ t.urls.teaching | relative_url }}">{{ t.labels.back_to_courses }}</a></div>
+
+<section class="talk-head">
+  <div class="pad">
+    <span class="mono dim">{{ page.ref }}{% if page.level %} · {{ page.level }}{% endif %}</span>
+    <h1>{{ page.title }}</h1>
+    {%- if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
+  </div>
+  <div class="pad">
+    <table class="specs">
+      <caption>{{ t.labels.specifications }}</caption>
+      {%- if page.institution %}<tr><th>{{ t.labels.institution }}</th><td><b>{{ page.institution }}</b></td></tr>{% endif %}
+      {%- if page.period %}<tr><th>{{ t.labels.period }}</th><td>{{ page.period }}</td></tr>{% endif %}
+      {%- if page.format %}<tr><th>{{ t.labels.format }}</th><td>{{ page.format }}</td></tr>{% endif %}
+      {%- if page.students %}<tr><th>{{ t.labels.audience }}</th><td class="num">{{ page.students }} <span class="mono dim">{{ t.labels.students }}</span></td></tr>{% endif %}
+      {%- if page.level %}<tr><th>{{ t.labels.level }}</th><td>{{ page.level }}</td></tr>{% endif %}
+    </table>
+  </div>
+</section>
+
+<div class="layout">
+  <article class="prose">
+    {{ content }}
+  </article>
+  <aside>
+    {%- if page.materials.size > 0 %}
+    <div class="panel">
+      <h3>{{ t.labels.materials }}</h3>
+      {%- for m in page.materials %}
+      <a class="resource" href="{{ m.url | relative_url }}"><span class="ic">{% if m.url contains ".pdf" %}PDF{% else %}&lt;/&gt;{% endif %}</span><span>{{ m.label }}<small>{{ m.url | split: "/" | last }}</small></span></a>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+    {%- for a in t.offer.audiences %}
+    <div class="panel">
+      <h3>{{ a.title }}</h3>
+      <a class="btn{% if forloop.first %} btn-primary{% endif %}" href="{% include mailto.html subject=a.cta.subject %}">{{ a.cta.label }} →</a>
+    </div>
+    {%- endfor %}
+  </aside>
+</div>
+
+{% include newsletter.html %}

@@ -1,0 +1,6 @@
+{%- comment -%}
+  mailto: link with a prefilled subject and body. url_encode turns spaces into "+",
+  which mail clients show literally, so they are switched to %20.
+  Params: subject
+{%- endcomment -%}
+mailto:{{ t.contact.email }}?subject={{ include.subject | url_encode | replace: "+", "%20" }}&amp;body={{ t.contact.mail_body | url_encode | replace: "+", "%20" }}

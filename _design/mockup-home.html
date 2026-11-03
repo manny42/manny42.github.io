@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morgan Faget · Technical training & talks</title>
+  <meta name="description" content="Software engineering trainer and speaker. Hands-on training for engineering teams, courses and guest lectures for schools.">
+  <meta name="color-scheme" content="light dark">
+  <!-- Mockup only: the real site self-hosts these two fonts as woff2 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+  <script>
+    // Apply saved theme before paint to avoid a flash
+    (function () {
+      var t = localStorage.getItem("theme");
+      if (t) document.documentElement.dataset.theme = t;
+    })();
+  </script>
+</head>
+<body>
+
+<!-- All copy on this page comes from _data/en.yml (or _data/fr.yml on the French home) -->
+<header class="site-header">
+  <div class="sheet pad">
+    <a class="wordmark" href="#">Morgan Faget <span class="mono">MF-42</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#teaching"><i>01</i>Training</a>
+      <a href="#talks"><i>02</i>Talks</a>
+      <a href="#writing"><i>03</i>Writing</a>
+      <a href="#about"><i>04</i>About</a>
+    </nav>
+    <div class="header-actions">
+      <!-- Language switcher: links to the page with the same ref in the other language -->
+      <nav class="lang-switch" aria-label="Language"><span aria-current="true">EN</span><a href="#" hreflang="fr" lang="fr">FR</a></nav>
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <a class="btn btn-sm btn-primary" href="#subscribe">Subscribe</a>
+    </div>
+  </div>
+</header>
+
+<main class="sheet">
+
+  <!-- HERO: the stat rows of the spec table are computed from the content files -->
+  <section class="hero">
+    <div class="pad">
+      <span class="mono dim reveal">MF-42 · Trainer / Speaker · Software engineering</span>
+      <h1 class="reveal">Technical ideas, <mark>made clear.</mark></h1>
+      <p class="lead reveal">Technical training and guest lectures for engineering teams and students. Practical content and hands-on technical examples, with the slides and code included.</p>
+      <div class="actions reveal">
+        <a class="btn btn-primary" href="#contact">Request a training →</a>
+        <a class="btn" href="#teaching">See the courses</a>
+      </div>
+    </div>
+    <div class="pad">
+      <table class="specs">
+        <caption>Specifications</caption>
+        <tr><th>People trained</th><td class="num">2,400+</td></tr>
+        <tr><th>Courses taught</th><td class="num">14</td></tr>
+        <tr><th>Talks given</th><td class="num">32</td></tr>
+        <tr><th>Audiences</th><td>Engineering teams, students at engineering and tech schools</td></tr>
+        <tr><th>Formats</th><td>1–3 day hands-on workshop, semester course, masterclass, internal talk</td></tr>
+        <tr><th>Topics</th><td>DevOps, Git, Architecture, JavaScript/TypeScript/Node.js, Python</td></tr>
+        <tr><th>Delivery</th><td>On-site or remote</td></tr>
+        <tr><th>Languages</th><td>English, French</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF: venues.show picks entries from _data/venues.yml -->
+  <div class="venues">
+    <span class="mono caps">Spoken & taught at</span>
+    <a href="https://www.imt-mines-ales.fr">IMT Mines Alès</a><a href="https://www.getyooz.com/fr">Yooz</a><a href="https://www.linkedin.com/company/hr-team-group/home/">HR Team</a>
+  </div>
+
+  <!-- 01 TRAINING: the offer (offer.audiences), then recent courses (_courses/) -->
+  <section id="teaching">
+    <div class="sec pad"><span class="n">01</span><h2>Training & guest lectures</h2><a class="link" href="#">All courses →</a></div>
+    <p class="offer-intro pad">Every session starts from your context: who's in the room, the tools they use, and what they should be able to do afterwards.</p>
+
+    <div class="offer">
+      <article class="offer-card">
+        <div class="offer-head"><span class="mono dim">OFFER-C</span><h3>For companies</h3></div>
+        <p class="pitch">Get a team up to speed on a specific topic, with as little time away from real work as possible.</p>
+        <div class="offer-lists">
+          <div>
+            <h4>Formats</h4>
+            <ul>
+              <li>On-site hands-on workshop, 1–3 days</li>
+              <li>Custom training built around your stack</li>
+              <li>Internal talk or tech day keynote</li>
+            </ul>
+          </div>
+          <div>
+            <h4>What you get</h4>
+            <ul>
+              <li>Exercises close to your own codebase</li>
+              <li>Slides and code repositories the team keeps</li>
+              <li>Wrap-up report after the session</li>
+            </ul>
+          </div>
+        </div>
+        <a class="btn btn-primary" href="mailto:contact@morganfaget.fr?subject=Training%20request%20for%20our%20team&body=Hi%20Morgan%2C%0A%0AOrganisation%3A%0AAudience%20%28size%2C%20level%29%3A%0ATopic%3A%0AFormat%20and%20length%3A%0ADates%3A%0AOn-site%20%28where%29%20or%20remote%3A%0A%0AThanks%21%0A">Request a quote →</a>
+      </article>
+
+      <article class="offer-card">
+        <div class="offer-head"><span class="mono dim">OFFER-S</span><h3>For schools</h3></div>
+        <p class="pitch">A practitioner who teaches through projects and knows how to run a classroom.</p>
+        <div class="offer-lists">
+          <div>
+            <h4>Formats</h4>
+            <ul>
+              <li>Semester course or module</li>
+              <li>Masterclass or guest lecture</li>
+              <li>Intensive workshop or hackathon</li>
+              <li>Project juries and mentoring</li>
+            </ul>
+          </div>
+          <div>
+            <h4>What you get</h4>
+            <ul>
+              <li>Syllabus, exercises and solutions provided</li>
+              <li>Grading aligned with the module's goals</li>
+              <li>Experience teaching hands-on lab classes of 30 students</li>
+            </ul>
+          </div>
+        </div>
+        <a class="btn btn-primary" href="mailto:contact@morganfaget.fr?subject=Teaching%20at%20our%20school&body=Hi%20Morgan%2C%0A%0AOrganisation%3A%0AAudience%20%28size%2C%20level%29%3A%0ATopic%3A%0AFormat%20and%20length%3A%0ADates%3A%0AOn-site%20%28where%29%20or%20remote%3A%0A%0AThanks%21%0A">Invite me to teach →</a>
+      </article>
+    </div>
+
+    <h3 class="subhead pad">Recently taught</h3>
+    <ul class="rows course-rows">
+      <li><div class="row head"><span>Ref · Period</span><span>Course</span><span>Format</span><span></span></div></li>
+      <li><div class="row">
+        <span class="mono when">C-14 · 2025–2026</span>
+        <div><h3>Advanced Systems Programming</h3><span class="dim">École 42</span></div>
+        <span class="dim where">12 weeks · 60 students</span>
+        <a class="btn btn-sm" href="#">Syllabus</a>
+      </div></li>
+      <li><div class="row">
+        <span class="mono when">C-13 · 2025</span>
+        <div><h3>Intro to Python for Data</h3><span class="dim">Univ. Lyon</span></div>
+        <span class="dim where">Undergraduate · 120 students</span>
+        <a class="btn btn-sm" href="#">Materials</a>
+      </div></li>
+      <li><div class="row">
+        <span class="mono when">C-12 · 2024</span>
+        <div><h3>CI/CD Hands-on Workshop</h3><span class="dim">Corporate training</span></div>
+        <span class="dim where">2 days · on-site</span>
+        <a class="btn btn-sm" href="#">Exercises</a>
+      </div></li>
+    </ul>
+  </section>
+
+  <!-- 02 TALKS -->
+  <section id="talks">
+    <div class="sec pad"><span class="n">02</span><h2>Latest talk</h2><a class="link" href="#">All 32 talks →</a></div>
+
+    <article class="featured">
+      <a class="cover-link" href="mockup-talk.html" aria-label="Watch: Shipping fast without breaking things">
+        <div class="cover">
+          <div class="top"><span>T-032</span><span>DevConf Paris · 2026</span></div>
+          <div class="title">Shipping fast without breaking things</div>
+          <span class="dur">38:12</span>
+          <span class="play"></span>
+        </div>
+      </a>
+      <div class="body">
+        <span class="mono dim">T-032 · Conference talk</span>
+        <h3>Shipping fast without breaking things</h3>
+        <p class="summary">How small teams can deploy dozens of times a day with feature flags, good tests and a culture that treats incidents as lessons.</p>
+        <dl class="kv">
+          <dt>Event</dt><dd>DevConf Paris</dd>
+          <dt>Date</dt><dd>2026-10-14</dd>
+          <dt>Length</dt><dd>40 min · English</dd>
+        </dl>
+        <div class="tags"><span class="tag">devops</span><span class="tag">testing</span><span class="tag">culture</span></div>
+        <div class="actions">
+          <a class="btn btn-sm btn-sig" href="#">▶ Video</a>
+          <a class="btn btn-sm" href="#">Slides (PDF)</a>
+          <a class="btn btn-sm" href="mockup-talk.html">Notes & links</a>
+        </div>
+      </div>
+    </article>
+
+    <ul class="rows talk-rows">
+      <li><div class="row head"><span>Ref · Date</span><span>Title</span><span>Event</span><span style="justify-self:end">Format</span></div></li>
+      <li><a href="#"><span class="mono when">T-031 · 06/2026</span><h3>Git internals in 30 minutes</h3><span class="dim where">Meetup Paris</span><span class="fmt">30 MIN</span></a></li>
+      <li><a href="#"><span class="mono when">T-030 · 03/2026</span><h3>Teaching code to 200 people at once</h3><span class="dim where">EduTech Summit</span><span class="fmt">KEYNOTE</span></a></li>
+      <li><a href="#"><span class="mono when">T-029 · 11/2025</span><h3>Observability for humans</h3><span class="dim where">PyData</span><span class="fmt">35 MIN</span></a></li>
+    </ul>
+  </section>
+
+  <!-- 03 WRITING + 04 ABOUT -->
+  <section class="split">
+    <div id="writing">
+      <div class="sec"><span class="n">03</span><h2>Recent posts</h2><a class="link" href="#">Archive →</a></div>
+      <ul class="rows post-rows">
+        <li><a href="#"><span class="mono dim">2026-10-20 · 6 min read</span><h3>What I changed after reading 400 student feedback forms</h3><span class="dim">The three edits that moved my course ratings the most.</span></a></li>
+        <li><a href="#"><span class="mono dim">2026-09-02 · 4 min read</span><h3>My slide template, and why it has no bullet points</h3><span class="dim">A tour of the deck I reuse for every talk.</span></a></li>
+        <li><a href="#"><span class="mono dim">2026-07-15 · 8 min read</span><h3>From CFP to stage: my talk-prep checklist</h3><span class="dim">Everything I do in the six weeks before a conference.</span></a></li>
+      </ul>
+    </div>
+    <div id="about">
+      <div class="sec"><span class="n">04</span><h2>Hi, I'm Morgan.</h2></div>
+      <div class="about" id="contact">
+        <p>I'm a software engineer and engineering manager who teaches what I practise every day. I train engineering teams in companies and teach students in schools, with the same approach: start from real cases and grow your skills in the areas that matter to you.</p>
+        <p class="dim">A team to train or a module to fill? Send me the audience, the topic and the dates. I reply within two working days.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="mailto:contact@morganfaget.fr?subject=Training%20or%20guest%20lecture&body=Hi%20Morgan%2C%0A%0AOrganisation%3A%0AAudience%20%28size%2C%20level%29%3A%0ATopic%3A%0AFormat%20and%20length%3A%0ADates%3A%0AOn-site%20%28where%29%20or%20remote%3A%0A%0AThanks%21%0A">Get in touch</a>
+          <a class="btn" href="#">Bio & speaker kit</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER: social_proof line hidden while empty -->
+  <section class="invert pad" id="subscribe">
+    <div>
+      <span class="mono caps">Newsletter · ~1 / month</span>
+      <h2>New material and posts in your inbox.</h2>
+      <p>No spam. Unsubscribe in one click. Prefer feeds? <a href="#">RSS works too.</a></p>
+    </div>
+    <div>
+      <form onsubmit="event.preventDefault()">
+        <input type="hidden" name="tag" value="en">
+        <input type="email" placeholder="you@example.com" aria-label="Email address" required>
+        <button class="btn btn-sig" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="sheet pad">
+    <span>© 2026 Morgan Faget · Built with Jekyll, hosted on GitHub Pages</span>
+    <nav aria-label="Social">
+      <a href="#">LinkedIn</a><a href="#">GitHub</a><a href="#">YouTube</a><a href="#">RSS</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("theme-toggle").addEventListener("click", function () {
+    var root = document.documentElement;
+    var dark = root.dataset.theme
+      ? root.dataset.theme === "dark"
+      : matchMedia("(prefers-color-scheme: dark)").matches;
+    var next = dark ? "light" : "dark";
+    var apply = function () { root.dataset.theme = next; localStorage.setItem("theme", next); };
+    document.startViewTransition ? document.startViewTransition(apply) : apply();
+  });
+</script>
+</body>
+</html>

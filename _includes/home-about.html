@@ -1,0 +1,11 @@
+<div id="about">
+  <div class="sec"><span class="n">0{{ include.n }}</span><h2>{{ t.about.title }}</h2></div>
+  <div class="about" id="contact">
+    <p>{{ t.about.body }}</p>
+    <p class="dim">{{ t.about.pitch }} {{ t.contact.reply_time }}</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="{% include mailto.html subject=t.contact.subject %}">{{ t.about.cta_primary }}</a>
+      <a class="btn" href="{{ t.urls.about | relative_url }}">{{ t.about.cta_secondary }}</a>
+    </div>
+  </div>
+</div>

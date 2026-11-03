@@ -1,0 +1,2 @@
+{%- assign r = include.talk -%}
+<li><a href="{{ r.url | relative_url }}"><span class="mono when">{{ r.ref }} · {{ r.date | date: "%m/%Y" }}</span><h3>{{ r.title }}</h3><span class="dim where">{{ r.event }}</span><span class="fmt">{{ r.duration | default: r.kind | upcase }}</span></a></li>

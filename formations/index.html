@@ -1,0 +1,11 @@
+---
+layout: listing
+lang: fr
+ref: teaching
+list: courses
+n: "01"
+title: "Formations & interventions"
+---
+{%- assign t = site.data[page.lang] -%}
+<p class="offer-intro pad">{{ t.offer.intro }}</p>
+{% include offer.html %}

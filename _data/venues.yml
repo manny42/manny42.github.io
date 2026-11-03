@@ -1,0 +1,5 @@
+# Every place Morgan has spoken or taught. fr.yml / en.yml choose which ones to show.
+# Placeholders from the mockups. TODO Morgan: replace with real venues.
+minesAles:    { name: "IMT Mines Alès", url: "https://www.imt-mines-ales.fr" }
+yooz:         { name: "Yooz", url: "https://www.getyooz.com/fr" }
+hr-team:      { name: "HR Team", url: "https://www.linkedin.com/company/hr-team-group/home/" }

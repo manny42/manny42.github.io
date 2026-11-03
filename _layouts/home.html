@@ -1,0 +1,129 @@
+---
+layout: base
+---
+{%- assign t = site.data[page.lang] -%}
+{%- include stats.html -%}
+{%- assign talks = site.talks | where: "lang", page.lang | sort: "date" | reverse -%}
+{%- assign courses = site.courses | where: "lang", page.lang | sort: "order", "last" -%}
+{%- assign posts = site.posts | where: "lang", page.lang -%}
+{%- assign featured = talks | where: "featured", true | first | default: talks.first -%}
+
+<section class="hero">
+  <div class="pad">
+    <span class="mono dim reveal">{{ t.hero.eyebrow }}</span>
+    <h1 class="reveal">{{ t.hero.title }} <mark>{{ t.hero.title_mark }}</mark></h1>
+    <p class="lead reveal">{{ t.hero.lead }}</p>
+    <div class="actions reveal">
+      <a class="btn btn-primary" href="{{ t.hero.cta_primary.url | relative_url }}">{{ t.hero.cta_primary.label }} →</a>
+      <a class="btn" href="{{ t.hero.cta_secondary.url | relative_url }}">{{ t.hero.cta_secondary.label }}</a>
+    </div>
+  </div>
+  <div class="pad">
+    <table class="specs">
+      <caption>{{ t.specs.caption }}</caption>
+      {%- for row in t.specs.rows %}
+        {%- if row.stat %}
+          {%- case row.stat -%}
+            {%- when "talks" -%}{%- assign v = stat_talks -%}
+            {%- when "courses" -%}{%- assign v = stat_courses -%}
+            {%- when "students" -%}{%- assign v = stat_students -%}
+          {%- endcase -%}
+          {%- if v > 0 %}
+      <tr><th>{{ row.label }}</th><td class="num">{{ v }}</td></tr>
+          {%- endif %}
+        {%- else %}
+      <tr><th>{{ row.label }}</th><td>{{ row.value }}</td></tr>
+        {%- endif %}
+      {%- endfor %}
+    </table>
+  </div>
+</section>
+
+{%- if t.venues.show.size > 0 %}
+<div class="venues">
+  <span class="mono caps">{{ t.venues.label }}</span>
+  {%- for key in t.venues.show %}
+    {%- assign v = site.data.venues[key] -%}
+    {%- if v.url %}<a href="{{ v.url }}">{{ v.name }}</a>{% else %}<span>{{ v.name }}</span>{% endif %}
+  {%- endfor %}
+</div>
+{%- endif %}
+
+{%- assign n = 0 -%}
+{%- for section in t.home_sections -%}
+{%- case section -%}
+
+{%- when "teaching" -%}
+{%- assign n = n | plus: 1 %}
+<section id="teaching">
+  <div class="sec pad"><span class="n">0{{ n }}</span><h2>{{ t.offer.title }}</h2>{% if courses.size > 0 %}<a class="link" href="{{ t.urls.teaching | relative_url }}">{{ t.labels.all_courses }} →</a>{% endif %}</div>
+  <p class="offer-intro pad">{{ t.offer.intro }}</p>
+  {% include offer.html %}
+  {%- if courses.size > 0 %}
+  <h3 class="subhead pad">{{ t.labels.recently_taught }}</h3>
+  <ul class="rows course-rows">
+    <li><div class="row head"><span>{{ t.labels.ref_date }}</span><span>{{ t.labels.course }}</span><span>{{ t.labels.format }}</span><span></span></div></li>
+    {%- for c in courses limit: 3 %}{% include course-row.html course=c %}{% endfor %}
+  </ul>
+  {%- endif %}
+</section>
+
+{%- when "talks" -%}
+{%- if featured %}
+{%- assign n = n | plus: 1 %}
+<section id="talks">
+  <div class="sec pad"><span class="n">0{{ n }}</span><h2>{{ t.labels.latest_talk }}</h2><a class="link" href="{{ t.urls.talks | relative_url }}">{{ t.labels.all_talks }} →</a></div>
+  <article class="featured">
+    <a class="cover-link" href="{{ featured.url | relative_url }}" aria-label="{{ featured.title | escape }}">{% include cover.html talk=featured %}</a>
+    <div class="body">
+      <span class="mono dim">{{ featured.ref }} · {{ featured.kind }}</span>
+      <h3>{{ featured.title }}</h3>
+      <p class="summary">{{ featured.summary }}</p>
+      <dl class="kv">
+        <dt>{{ t.labels.event }}</dt><dd>{{ featured.event }}</dd>
+        <dt>{{ t.labels.date }}</dt><dd>{{ featured.date | date: "%Y-%m-%d" }}</dd>
+        {%- if featured.duration %}<dt>{{ t.labels.length }}</dt><dd>{{ featured.duration }}{% if featured.language %} · {{ featured.language }}{% endif %}</dd>{% endif %}
+      </dl>
+      {%- if featured.tags.size > 0 %}
+      <div class="tags">{% for tag in featured.tags %}<span class="tag">{{ tag }}</span>{% endfor %}</div>
+      {%- endif %}
+      <div class="actions">
+        {%- if featured.video %}<a class="btn btn-sm btn-sig" href="{{ featured.url | relative_url }}">▶ {{ t.labels.video }}</a>{% endif %}
+        {%- if featured.slides %}<a class="btn btn-sm" href="{{ featured.slides | relative_url }}">{{ t.labels.slides }}</a>{% endif %}
+        <a class="btn btn-sm" href="{{ featured.url | relative_url }}">{{ t.labels.notes }}</a>
+      </div>
+    </div>
+  </article>
+  {%- assign others = talks | where_exp: "x", "x.url != featured.url" %}
+  {%- if others.size > 0 %}
+  <ul class="rows talk-rows">
+    <li><div class="row head"><span>{{ t.labels.ref_date }}</span><span>{{ t.labels.title }}</span><span>{{ t.labels.event }}</span><span style="justify-self:end">{{ t.labels.format }}</span></div></li>
+    {%- for r in others limit: 3 %}{% include talk-row.html talk=r %}{% endfor %}
+  </ul>
+  {%- endif %}
+</section>
+{%- endif %}
+
+{%- when "writing" -%}
+{%- assign n = n | plus: 1 %}
+<section class="split">
+  {%- if posts.size > 0 %}
+  <div id="writing">
+    <div class="sec"><span class="n">0{{ n }}</span><h2>{{ t.labels.recent_posts }}</h2><a class="link" href="{{ t.urls.blog | relative_url }}">{{ t.labels.archive }} →</a></div>
+    <ul class="rows post-rows">
+      {%- for p in posts limit: 3 %}
+      {%- assign words = p.content | number_of_words -%}
+      {%- assign minutes = words | divided_by: 200 | at_least: 1 %}
+      <li><a href="{{ p.url | relative_url }}"><span class="mono dim">{{ p.date | date: "%Y-%m-%d" }} · {{ minutes }} {{ t.labels.min_read }}</span><h3>{{ p.title }}</h3><span class="dim">{{ p.description }}</span></a></li>
+      {%- endfor %}
+    </ul>
+  </div>
+  {%- assign n = n | plus: 1 %}
+  {%- endif %}
+  {% include home-about.html n=n %}
+</section>
+
+{%- endcase -%}
+{%- endfor %}
+
+{% include newsletter.html %}

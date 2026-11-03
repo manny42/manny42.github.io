@@ -1,0 +1,21 @@
+{%- comment -%}
+  Newsletter block. Hidden until `buttondown` is set in _config.yml.
+  Params: eyebrow, title (default to the homepage wording)
+{%- endcomment -%}
+{%- if site.buttondown != "" -%}
+<section class="invert pad" id="subscribe">
+  <div>
+    <span class="mono caps">{{ include.eyebrow | default: t.newsletter.eyebrow }}</span>
+    <h2>{{ include.title | default: t.newsletter.title }}</h2>
+    <p>{{ t.newsletter.text }} <a href="{{ t.urls.feed | relative_url }}">{{ t.newsletter.rss }}</a></p>
+  </div>
+  <div>
+    <form action="https://buttondown.com/api/emails/embed-subscribe/{{ site.buttondown }}" method="post">
+      <input type="hidden" name="tag" value="{{ t.newsletter.tag }}">
+      <input type="email" name="email" placeholder="{{ t.newsletter.placeholder }}" aria-label="Email" required>
+      <button class="btn btn-sig" type="submit">{{ t.newsletter.button }}</button>
+    </form>
+    {%- if t.newsletter.social_proof != "" %}<small>{{ t.newsletter.social_proof }}</small>{% endif %}
+  </div>
+</section>
+{%- endif -%}

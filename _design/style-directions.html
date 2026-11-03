@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Directions de style</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- Page shell (only for this comparison board) ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: #d9d9d6; color: #111; font: 16px/1.55 system-ui, sans-serif; }
+    .board { width: min(100% - 2rem, 1200px); margin: 0 auto; padding: 3rem 0 5rem; }
+    .board > header h1 { font-size: 1.6rem; margin: 0 0 .5rem; }
+    .board > header p { margin: 0; color: #444; max-width: 60ch; }
+    .label { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem 1rem; margin: 3.5rem 0 1rem; }
+    .label h2 { margin: 0; font-size: 1.25rem; }
+    .label p { margin: 0; color: #444; font-size: .95rem; }
+    .notes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; font-size: .9rem; }
+    .notes div { background: #fff; border-radius: 8px; padding: .9rem 1rem; }
+    .notes b { display: block; margin-bottom: .25rem; }
+    .dir { overflow: hidden; border-radius: 10px; box-shadow: 0 10px 40px rgb(0 0 0 / .18); }
+    a { color: inherit; text-decoration: none; }
+
+    /* =========================================================
+       A. TERMINAL : le site comme une session shell
+       ========================================================= */
+    .a {
+      --bg: #0b0f0e; --panel: #111816; --ink: #d4e0da; --dim: #6f8079; --line: #1f2b27;
+      --green: #5cf29a; --amber: #f6b74a; --pink: #ff6b9a;
+      background: var(--bg); color: var(--ink); font: 15px/1.7 "JetBrains Mono", ui-monospace, monospace;
+      position: relative;
+    }
+    .a::after { /* subtle scanlines */
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: repeating-linear-gradient(0deg, rgb(255 255 255 / .018) 0 1px, transparent 1px 3px);
+    }
+    .a .tmux { display: flex; flex-wrap: wrap; gap: 0 1.2rem; align-items: center; background: var(--green); color: #04130b; padding: .2rem .9rem; font-size: .82rem; font-weight: 700; }
+    .a .tmux .on { background: #04130b; color: var(--green); padding: 0 .5rem; }
+    .a .tmux .r { margin-left: auto; font-weight: 500; }
+    .a .wrap { padding: clamp(1.5rem, 5vw, 3.5rem); }
+    .a .prompt { margin: 0; color: var(--dim); }
+    .a .prompt .u { color: var(--green); }
+    .a .prompt .p { color: #7aa7ff; }
+    .a .prompt .c { color: var(--ink); }
+    .a h1 { font: 800 clamp(1.9rem, 4.6vw, 3.4rem)/1.12 "JetBrains Mono", monospace; letter-spacing: -.03em; margin: 1rem 0 1.25rem; max-width: 22ch; }
+    .a h1 .hl { color: var(--bg); background: var(--amber); padding: 0 .2em; }
+    .a .out { color: var(--dim); margin: 0 0 2rem; max-width: 60ch; }
+    .a .out::before { content: "# "; color: var(--pink); }
+    .a .actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+    .a .btn { border: 1px solid var(--green); color: var(--green); padding: .55rem 1rem; transition: background .15s, color .15s; }
+    .a .btn:hover, .a .btn.pri { background: var(--green); color: #04130b; }
+    .a .btn.pri:hover { background: transparent; color: var(--green); }
+    .a .stats { margin: 2.5rem 0 0; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--amber); font: inherit; white-space: pre; overflow-x: auto; }
+    .a .stats .bar { color: var(--green); }
+    .a .stats .k { color: var(--dim); }
+    .a .sep { height: 1px; background: var(--line); margin: 3rem 0 2rem; }
+    .a .ls { list-style: none; margin: 1rem 0 0; padding: 0; }
+    .a .ls li { display: grid; grid-template-columns: 7.5rem 4.5rem 1fr auto; gap: 1rem; padding: .55rem .5rem; border-bottom: 1px dashed var(--line); align-items: baseline; }
+    .a .ls li:hover { background: var(--panel); }
+    .a .ls li:hover .name { color: var(--green); }
+    .a .ls .d { color: var(--dim); }
+    .a .ls .k { color: var(--pink); }
+    .a .ls .name { font-weight: 700; overflow-wrap: anywhere; }
+    .a .ls .m { color: var(--dim); font-size: .85rem; white-space: nowrap; }
+    .a .ls .m b { color: var(--amber); font-weight: 500; }
+    .a .cursor { display: inline-block; width: .6em; height: 1.1em; background: var(--green); vertical-align: -.15em; animation: blink 1.1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* =========================================================
+       B. BLUEPRINT : le site comme un plan technique
+       ========================================================= */
+    .b {
+      --paper: #0e2b4c; --grid: rgb(140 190 255 / .09); --grid-major: rgb(140 190 255 / .17);
+      --ink: #e8f1ff; --dim: #8fb2dc; --line: #6fa3e0; --cyan: #7fe0ff; --note: #ffb454;
+      color: var(--ink); font: 16px/1.6 "IBM Plex Sans Condensed", sans-serif;
+      background:
+        linear-gradient(var(--grid-major) 1px, transparent 1px) 0 0 / 120px 120px,
+        linear-gradient(90deg, var(--grid-major) 1px, transparent 1px) 0 0 / 120px 120px,
+        linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 24px 24px,
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 24px 24px,
+        var(--paper);
+    }
+    .b .mono { font-family: "IBM Plex Mono", monospace; }
+    .b .head { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 2rem; padding: 1rem clamp(1.25rem, 4vw, 2.5rem); border-bottom: 1px solid var(--line); }
+    .b .logo { font: 700 1.15rem "IBM Plex Mono", monospace; border: 1.5px solid var(--ink); padding: .1rem .5rem; }
+    .b .logo span { color: var(--note); }
+    .b nav { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-left: auto; font: 500 .85rem "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: .06em; }
+    .b nav a i { font-style: normal; color: var(--note); margin-right: .35rem; }
+    .b nav a:hover { color: var(--cyan); }
+    .b .hero { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 2.5rem); align-items: center; }
+    .b .fig { font: 500 .78rem "IBM Plex Mono", monospace; letter-spacing: .14em; color: var(--note); text-transform: uppercase; }
+    .b h1 { font-weight: 700; font-size: clamp(2.1rem, 4.8vw, 3.6rem); line-height: 1.04; letter-spacing: -.01em; margin: .9rem 0 0; text-transform: uppercase; }
+    .b h1 span { color: var(--cyan); }
+    /* dimension line under the title */
+    .b .dim { position: relative; margin: 1.6rem 0 1.8rem; height: 1px; background: var(--dim); }
+    .b .dim::before, .b .dim::after { content: ""; position: absolute; top: -6px; width: 1px; height: 13px; background: var(--dim); }
+    .b .dim::before { left: 0; } .b .dim::after { right: 0; }
+    .b .dim span { position: absolute; left: 50%; top: -.75rem; transform: translateX(-50%); background: var(--paper); padding: 0 .6rem; font: 500 .8rem "IBM Plex Mono", monospace; color: var(--dim); white-space: nowrap; }
+    .b .lead { color: var(--dim); font-size: 1.1rem; margin: 0 0 1.75rem; max-width: 46ch; }
+    .b .btn { display: inline-block; font: 600 .85rem "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: .06em; padding: .7rem 1.1rem; border: 1.5px solid var(--ink); margin: 0 .5rem .5rem 0; transition: background .15s, color .15s; }
+    .b .btn:hover, .b .btn.pri { background: var(--ink); color: var(--paper); }
+    /* portrait frame with crop marks and callouts */
+    .b .frame { position: relative; aspect-ratio: 4/5; border: 1px dashed var(--line); display: grid; place-items: center; }
+    .b .frame::before { content: ""; position: absolute; inset: 14px; background: radial-gradient(circle at 50% 40%, rgb(127 224 255 / .25), transparent 60%), rgb(255 255 255 / .03); }
+    .b .frame .cross { position: absolute; width: 22px; height: 22px; border-color: var(--cyan); border-style: solid; }
+    .b .frame .tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; } .b .frame .tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+    .b .frame .bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; } .b .frame .br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+    .b .frame .tag { position: absolute; font: 500 .72rem "IBM Plex Mono", monospace; color: var(--note); }
+    .b .frame .t1 { top: 18%; right: -1px; transform: translateX(100%); padding-left: .5rem; border-top: 1px solid var(--note); }
+    .b .frame .center { font: 500 .78rem "IBM Plex Mono", monospace; color: var(--dim); position: relative; }
+    .b .section { padding: 0 clamp(1.25rem, 4vw, 2.5rem) 2.5rem; }
+    .b .section h2 { display: flex; align-items: center; gap: 1rem; font: 600 .9rem "IBM Plex Mono", monospace; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 1.25rem; color: var(--dim); }
+    .b .section h2::after { content: ""; flex: 1; height: 1px; background: var(--line); opacity: .5; }
+    .b .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .b .card { border: 1px solid var(--line); background: rgb(14 43 76 / .85); transition: border-color .15s, transform .2s; }
+    .b .card:hover { border-color: var(--cyan); transform: translateY(-3px); }
+    .b .card svg { display: block; width: 100%; height: auto; border-bottom: 1px solid var(--line); }
+    .b .card .body { padding: 1rem 1.1rem 1.2rem; }
+    .b .card .ref { display: flex; justify-content: space-between; font: 500 .72rem "IBM Plex Mono", monospace; color: var(--note); letter-spacing: .06em; }
+    .b .card h3 { font-size: 1.2rem; line-height: 1.2; margin: .5rem 0 .4rem; }
+    .b .card p { margin: 0; color: var(--dim); font-size: .9rem; }
+    /* engineering title block */
+    .b .titleblock { margin: 1rem clamp(1.25rem, 4vw, 2.5rem) 2rem auto; width: min(100% - 2.5rem, 420px); border: 1.5px solid var(--ink); display: grid; grid-template-columns: 1fr 1fr; font: 500 .72rem "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: .05em; }
+    .b .titleblock div { padding: .45rem .6rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .b .titleblock div:nth-child(2n) { border-right: 0; }
+    .b .titleblock div:nth-last-child(-n+2) { border-bottom: 0; }
+    .b .titleblock small { display: block; color: var(--dim); font-size: .62rem; }
+    .b .titleblock .big { grid-column: 1 / -1; border-right: 0; font: 700 1rem "IBM Plex Sans Condensed", sans-serif; }
+
+    /* =========================================================
+       C. DATASHEET : le site comme une fiche technique de composant
+       ========================================================= */
+    .c {
+      --bg: #f3f3f1; --ink: #0b0b0b; --dim: #5d5d5a; --line: #0b0b0b; --hair: #cfcfca; --sig: #d4ff3a; --blue: #2b3bff;
+      background: var(--bg); color: var(--ink); font: 16px/1.55 "Space Grotesk", sans-serif;
+    }
+    .c .mono { font-family: "IBM Plex Mono", monospace; }
+    .c .top { display: grid; grid-template-columns: 1fr auto auto; gap: 1.5rem; padding: .7rem clamp(1.25rem, 4vw, 2.5rem); border-bottom: 2px solid var(--line); font: 500 .78rem "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: .05em; }
+    .c .top b { font-weight: 600; }
+    .c .hero { display: grid; grid-template-columns: 1.3fr 1fr; border-bottom: 2px solid var(--line); }
+    .c .hero > div { padding: clamp(1.5rem, 4vw, 2.75rem) clamp(1.25rem, 4vw, 2.5rem); }
+    .c .hero > div + div { border-left: 2px solid var(--line); }
+    .c .pn { font: 500 .8rem "IBM Plex Mono", monospace; color: var(--dim); }
+    .c h1 { font-weight: 700; font-size: clamp(2.8rem, 8vw, 6.2rem); line-height: .92; letter-spacing: -.045em; margin: 1rem 0 1.5rem; }
+    .c h1 mark { background: var(--sig); color: inherit; padding: 0 .08em; }
+    .c .lead { font-size: 1.15rem; max-width: 40ch; margin: 0 0 1.75rem; }
+    .c .btn { display: inline-flex; align-items: center; gap: .6rem; font: 600 .95rem "Space Grotesk", sans-serif; padding: .75rem 1.2rem; border: 2px solid var(--ink); margin: 0 .5rem .5rem 0; transition: transform .15s, box-shadow .15s; }
+    .c .btn:hover { transform: translate(-3px, -3px); box-shadow: 3px 3px 0 var(--ink); }
+    .c .btn.pri { background: var(--ink); color: var(--bg); }
+    .c .specs { width: 100%; border-collapse: collapse; font-size: .92rem; }
+    .c .specs caption { text-align: left; font: 600 .78rem "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: .08em; padding-bottom: .75rem; }
+    .c .specs th, .c .specs td { text-align: left; padding: .6rem 0; border-top: 1px solid var(--hair); vertical-align: top; }
+    .c .specs th { font: 500 .8rem "IBM Plex Mono", monospace; color: var(--dim); width: 42%; padding-right: 1rem; }
+    .c .specs .num { font-weight: 700; font-size: 1.6rem; line-height: 1; }
+    .c .sec { display: grid; grid-template-columns: auto 1fr auto; gap: 1.25rem; align-items: baseline; padding: 1.5rem clamp(1.25rem, 4vw, 2.5rem) 1rem; border-bottom: 1px solid var(--line); }
+    .c .sec .n { font: 500 .85rem "IBM Plex Mono", monospace; }
+    .c .sec h2 { margin: 0; font-size: clamp(1.6rem, 3.5vw, 2.4rem); letter-spacing: -.03em; }
+    .c .sec a { font: 500 .85rem "IBM Plex Mono", monospace; border-bottom: 2px solid var(--sig); }
+    .c .rows { list-style: none; margin: 0; padding: 0; }
+    .c .rows li a { display: grid; grid-template-columns: 9rem 1fr 11rem 5rem; gap: 1.25rem; align-items: center; padding: 1rem clamp(1.25rem, 4vw, 2.5rem); border-bottom: 1px solid var(--hair); transition: background .12s; }
+    .c .rows li a:hover { background: var(--sig); }
+    .c .rows .pn { color: var(--ink); }
+    .c .rows h3 { margin: 0; font-size: 1.2rem; letter-spacing: -.01em; }
+    .c .rows .ev { font-size: .9rem; color: var(--dim); }
+    .c .rows .fmt { font: 500 .75rem "IBM Plex Mono", monospace; border: 1px solid var(--ink); padding: .15rem .45rem; justify-self: end; }
+    .c .foot { padding: 1rem clamp(1.25rem, 4vw, 2.5rem); font: 500 .75rem "IBM Plex Mono", monospace; color: var(--dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 860px) {
+      .notes, .b .hero, .b .cards, .c .hero { grid-template-columns: 1fr; }
+      .c .hero > div + div { border-left: 0; border-top: 2px solid var(--line); }
+      .b .frame { max-width: 280px; }
+      .b .frame .t1 { display: none; }
+      .a .ls li { grid-template-columns: 6.5rem 1fr; gap: .1rem 1rem; }
+      .a .ls .k { display: none; }
+      .a .ls .m { grid-column: 2; white-space: normal; }
+      .c .rows li a { grid-template-columns: 1fr auto; gap: .3rem 1rem; }
+      .c .rows .ev { grid-column: 1; }
+      .c .rows .fmt { grid-row: 1; grid-column: 2; }
+      .c .top { grid-template-columns: 1fr; gap: .2rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+<div class="board">
+  <header>
+    <h1>Trois directions de style</h1>
+    <p>Même contenu (accroche, chiffres, derniers talks), trois identités. Chacune remplacerait le duo crème/orange et serif actuel. Les textes sont en français pour l'exercice.</p>
+  </header>
+
+  <!-- ============ A ============ -->
+  <div class="label"><h2>A. Terminal</h2><p>Le site se lit comme une session shell : prompt, sorties de commandes, barre tmux.</p></div>
+  <section class="dir a">
+    <div class="tmux"><span>[mf]</span><a class="on" href="#">0:accueil*</a><a href="#">1:talks</a><a href="#">2:formations</a><a href="#">3:blog</a><a href="#">4:contact</a><span class="r">FR|EN · 03 nov 26</span></div>
+    <div class="wrap">
+      <p class="prompt"><span class="u">morgan@faget</span>:<span class="p">~</span>$ <span class="c">whoami</span></p>
+      <h1>Conférencier &amp; formateur. Je rends les systèmes complexes <span class="hl">lisibles</span>.</h1>
+      <p class="out">talks, formations et notes d'ingénierie logicielle. Slides, vidéos et code inclus.</p>
+      <div class="actions">
+        <a class="btn pri" href="#">./voir-les-talks</a>
+        <a class="btn" href="#">--m-inviter</a>
+      </div>
+<pre class="stats"><span class="k">talks      </span> 32    <span class="bar">████████████████</span>░░░░
+<span class="k">formations </span> 14    <span class="bar">███████</span>░░░░░░░░░░░░░
+<span class="k">étudiants  </span> 2400+ <span class="bar">████████████████████</span></pre>
+
+      <div class="sep"></div>
+      <p class="prompt"><span class="u">morgan@faget</span>:<span class="p">~</span>$ <span class="c">ls -lt talks/ | head -4</span></p>
+      <ul class="ls">
+        <li><span class="d">2026-10-14</span><span class="k">conf</span><a class="name" href="#">shipping-fast-without-breaking-things</a><span class="m">DevConf Paris · 40m · <b>▶ slides code</b></span></li>
+        <li><span class="d">2026-06-02</span><span class="k">meetup</span><a class="name" href="#">git-internals-en-30-minutes</a><span class="m">Meetup Paris · 30m · <b>▶ slides</b></span></li>
+        <li><span class="d">2026-03-18</span><span class="k">keynote</span><a class="name" href="#">enseigner-le-code-a-200-personnes</a><span class="m">EduTech Summit · 45m · <b>slides</b></span></li>
+        <li><span class="d">2025-11-07</span><span class="k">conf</span><a class="name" href="#">observability-for-humans</a><span class="m">PyData · 35m · <b>▶ code</b></span></li>
+      </ul>
+      <p class="prompt" style="margin-top:1.5rem"><span class="u">morgan@faget</span>:<span class="p">~</span>$ <span class="cursor"></span></p>
+    </div>
+  </section>
+  <div class="notes">
+    <div><b>Évoque</b>Le geste du développeur, la maîtrise de l'outil. Très reconnaissable pour un public tech.</div>
+    <div><b>Typo &amp; couleurs</b>JetBrains Mono partout. Fond quasi noir, vert phosphore, ambre et rose pour la syntaxe.</div>
+    <div><b>Risque</b>Le thème « terminal » est répandu ; il faut le pousser (barre tmux, listings) pour qu'il reste original. Moins lisible pour un acheteur de formation non-tech.</div>
+  </div>
+
+  <!-- ============ B ============ -->
+  <div class="label"><h2>B. Blueprint</h2><p>Le site comme un plan d'ingénieur : papier quadrillé, cotes, repères, cartouche.</p></div>
+  <section class="dir b">
+    <div class="head">
+      <span class="logo">MF<span>/</span>42</span>
+      <nav><a href="#"><i>01</i>Talks</a><a href="#"><i>02</i>Formations</a><a href="#"><i>03</i>Écrits</a><a href="#"><i>04</i>Contact</a></nav>
+    </div>
+    <div class="hero">
+      <div>
+        <div class="fig">Fig. 01 · Profil</div>
+        <h1>Des talks et des formations conçus <span>comme des systèmes</span>.</h1>
+        <div class="dim"><span>32 talks · 14 formations · 2 400 étudiants</span></div>
+        <p class="lead">Précis, testés, réutilisables : slides, enregistrements et supports de cours sur l'ingénierie logicielle.</p>
+        <a class="btn pri" href="#">Voir les talks</a><a class="btn" href="#">Me faire intervenir</a>
+      </div>
+      <div class="frame">
+        <span class="cross tl"></span><span class="cross tr"></span><span class="cross bl"></span><span class="cross br"></span>
+        <span class="tag t1">A · portrait 4:5</span>
+        <span class="center">[ photo ]</span>
+      </div>
+    </div>
+    <div class="section">
+      <h2>02 · Derniers talks</h2>
+      <div class="cards">
+        <a class="card" href="#">
+          <svg viewBox="0 0 320 150" fill="none" stroke="#7fe0ff" stroke-width="1.2"><rect x="30" y="55" width="60" height="40"/><rect x="130" y="35" width="60" height="40"/><rect x="130" y="85" width="60" height="40"/><rect x="230" y="55" width="60" height="40"/><path d="M90 75h40M110 75v30h20M190 55h20v20h20M190 105h20V75"/><text x="30" y="20" fill="#ffb454" stroke="none" font-family="IBM Plex Mono" font-size="10">PIPELINE CI/CD</text></svg>
+          <div class="body"><div class="ref"><span>REF T-032</span><span>OCT 2026</span></div><h3>Shipping fast without breaking things</h3><p>DevConf Paris · 40 min · vidéo, slides, code</p></div>
+        </a>
+        <a class="card" href="#">
+          <svg viewBox="0 0 320 150" fill="none" stroke="#7fe0ff" stroke-width="1.2"><circle cx="60" cy="75" r="9"/><circle cx="130" cy="75" r="9"/><circle cx="200" cy="75" r="9"/><circle cx="200" cy="120" r="9"/><circle cx="270" cy="75" r="9"/><path d="M69 75h52M139 75h52M209 75h52M136 82l57 33M209 120h40l15-37"/><text x="30" y="20" fill="#ffb454" stroke="none" font-family="IBM Plex Mono" font-size="10">DAG DES COMMITS</text></svg>
+          <div class="body"><div class="ref"><span>REF T-031</span><span>JUN 2026</span></div><h3>Git internals en 30 minutes</h3><p>Meetup Paris · 30 min · vidéo, slides</p></div>
+        </a>
+        <a class="card" href="#">
+          <svg viewBox="0 0 320 150" fill="none" stroke="#7fe0ff" stroke-width="1.2"><path d="M30 120h260M30 120V30"/><path d="M30 110l40-15 40 5 40-35 40 10 40-40 40 8" stroke-dasharray="0"/><path d="M30 60h260" stroke-dasharray="4 4" stroke="#ffb454"/><text x="40" y="20" fill="#ffb454" stroke="none" font-family="IBM Plex Mono" font-size="10">LATENCE P99 · SLO</text></svg>
+          <div class="body"><div class="ref"><span>REF T-030</span><span>NOV 2025</span></div><h3>Observability for humans</h3><p>PyData · 35 min · vidéo, code</p></div>
+        </a>
+      </div>
+    </div>
+    <div class="titleblock">
+      <div class="big">Morgan Faget · Conférences &amp; formations</div>
+      <div><small>Dessiné par</small>M. Faget</div><div><small>Révision</small>2026.11</div>
+      <div><small>Langues</small>FR / EN</div><div><small>Échelle</small>1:1</div>
+    </div>
+  </section>
+  <div class="notes">
+    <div><b>Évoque</b>La conception, la rigueur, l'architecture. Parle aussi bien aux ingénieurs qu'aux responsables formation.</div>
+    <div><b>Typo &amp; couleurs</b>IBM Plex Sans Condensed + Plex Mono. Bleu de plan, cyan pour les tracés, orange « annotation ».</div>
+    <div><b>Atout</b>Rare sur les sites de speakers. Chaque talk peut avoir son petit schéma SVG au lieu d'une vignette, ce qui reste léger.</div>
+  </div>
+
+  <!-- ============ C ============ -->
+  <div class="label"><h2>C. Datasheet</h2><p>Le site comme la fiche technique d'un composant : grille stricte, références, tableau de specs.</p></div>
+  <section class="dir c">
+    <div class="top"><b>Morgan Faget</b><span>Datasheet · rév. 2026.11</span><span>Conférences · Formations</span></div>
+    <div class="hero">
+      <div>
+        <span class="pn">MF-42 · Conférencier / formateur</span>
+        <h1>La technique, <mark>transmise.</mark></h1>
+        <p class="lead">Talks et formations sur l'ingénierie logicielle, avec slides, vidéos et code pour aller plus loin.</p>
+        <a class="btn pri" href="#">Voir les talks →</a><a class="btn" href="#">Demander une intervention</a>
+      </div>
+      <div>
+        <table class="specs">
+          <caption>Caractéristiques</caption>
+          <tr><th>Talks donnés</th><td class="num">32</td></tr>
+          <tr><th>Formations</th><td class="num">14</td></tr>
+          <tr><th>Personnes formées</th><td class="num">2 400+</td></tr>
+          <tr><th>Domaines</th><td>DevOps, Git, systèmes, Python, pédagogie</td></tr>
+          <tr><th>Formats</th><td>Keynote, talk 30–45 min, atelier 1–3 j</td></tr>
+          <tr><th>Langues</th><td>Français, anglais</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="sec"><span class="n">01</span><h2>Talks récents</h2><a href="#">Les 32 talks</a></div>
+    <ul class="rows">
+      <li><a href="#"><span class="pn">T-032 · 10/2026</span><h3>Shipping fast without breaking things</h3><span class="ev">DevConf Paris</span><span class="fmt">40 MIN</span></a></li>
+      <li><a href="#"><span class="pn">T-031 · 06/2026</span><h3>Git internals en 30 minutes</h3><span class="ev">Meetup Paris</span><span class="fmt">30 MIN</span></a></li>
+      <li><a href="#"><span class="pn">T-030 · 03/2026</span><h3>Enseigner le code à 200 personnes</h3><span class="ev">EduTech Summit</span><span class="fmt">KEYNOTE</span></a></li>
+    </ul>
+    <div class="foot"><span>Toutes les specs sont générées depuis les fichiers Markdown.</span><span>Page 1 / 1</span></div>
+  </section>
+  <div class="notes">
+    <div><b>Évoque</b>La précision, le sérieux, une identité « produit ». Le tableau de specs sert directement les organisateurs.</div>
+    <div><b>Typo &amp; couleurs</b>Space Grotesk + IBM Plex Mono. Noir sur gris froid, un seul signal vert acide.</div>
+    <div><b>Atout</b>Très éditorial et lisible, fonctionne bien en clair comme en sombre. Plus sobre que A et B, donc moins « déguisé ».</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,185 @@
+# =========================================================
+# English version: interface labels + positioning
+# Target (first draft): same as French. Companies looking for a technical trainer
+# for their teams, and schools looking for a guest lecturer for their students.
+# Lines marked "TODO Morgan" need your input: nothing there has been made up.
+# =========================================================
+
+lang: en
+locale: en_US
+other_lang: fr
+
+# ---------- Metadata (SEO, sharing) ----------
+meta:
+  title: "Morgan Faget · Technical training & talks"
+  description: "Software engineering trainer and speaker. Hands-on training for engineering teams, courses and guest lectures for schools."
+  og_image: /assets/img/og-default-en.png
+
+# ---------- Navigation ----------
+nav:
+  - { n: "01", label: Training, url: /en/teaching/ }
+  - { n: "02", label: Talks, url: /en/talks/ }
+  - { n: "03", label: Writing, url: /en/blog/ }
+  - { n: "04", label: About, url: /en/about/ }
+
+home_sections: [teaching, talks, writing, about]
+
+# Main page URLs (links, language switcher, RSS feed)
+urls: { home: /en/, talks: /en/talks/, teaching: /en/teaching/, blog: /en/blog/, about: /en/about/, feed: /en/feed.xml }
+
+# ---------- Home: hero ----------
+hero:
+  eyebrow: "MF-42 · Trainer / Speaker · Software engineering"
+  title: "Technical ideas,"
+  title_mark: "made clear."
+  lead: "Technical training and guest lectures for engineering teams and students. Practical content and hands-on technical examples, with the slides and code included."
+  cta_primary: { label: "Request a training", url: "#contact" }
+  cta_secondary: { label: "See the courses", url: /en/teaching/ }
+
+specs:
+  caption: Specifications
+  rows:
+    - { label: "People trained", stat: students }
+    - { label: "Courses taught", stat: courses }
+    - { label: "Talks given", stat: talks }
+    - label: Audiences
+      value: "Engineering teams, students at engineering and tech schools"
+    - label: Formats
+      value: "1–3 day hands-on workshop, semester course, masterclass, internal talk"
+    - label: Topics
+      value: "DevOps, Git, Architecture, JavaScript/TypeScript/Node.js, Python"
+    - label: Delivery
+      value: "On-site or remote"
+    - label: Languages
+      value: "English, French"
+
+venues:
+  label: "Spoken & taught at"
+  show: [minesAles, yooz, hr-team]
+
+# ---------- Offer ----------
+offer:
+  title: "Training & guest lectures"
+  intro: "Every session starts from your context: who's in the room, the tools they use, and what they should be able to do afterwards."
+  audiences:
+    - key: companies
+      ref: "OFFER-C"
+      title: "For companies"
+      pitch: "Get a team up to speed on a specific topic, with as little time away from real work as possible."
+      formats:
+        - "On-site hands-on workshop, 1–3 days"
+        - "Custom training built around your stack"
+        - "Internal talk or tech day keynote"
+      outcomes:
+        - "Exercises close to your own codebase"
+        - "Slides and code repositories the team keeps"
+        - "Wrap-up report after the session"
+      cta: { label: "Request a quote", subject: "Training request for our team" }
+    - key: schools
+      ref: "OFFER-S"
+      title: "For schools"
+      pitch: "A practitioner who teaches through projects and knows how to run a classroom."
+      formats:
+        - "Semester course or module"
+        - "Masterclass or guest lecture"
+        - "Intensive workshop or hackathon"
+        - "Project juries and mentoring"
+      outcomes:
+        - "Syllabus, exercises and solutions provided"
+        - "Grading aligned with the module's goals"
+        - "Experience teaching hands-on lab classes of 30 students"
+      cta: { label: "Invite me to teach", subject: "Teaching at our school" }
+
+# ---------- Contact ----------
+contact:
+  email: contact@morganfaget.fr
+  subject: "Training or guest lecture"            # subject of the generic contact button
+  reply_time: "I reply within two working days."
+  mail_body: |
+    Hi Morgan,
+
+    Organisation:
+    Audience (size, level):
+    Topic:
+    Format and length:
+    Dates:
+    On-site (where) or remote:
+
+    Thanks!
+
+# ---------- About (short version on the homepage) ----------
+about:
+  title: "Hi, I'm Morgan."
+  body: "I'm a software engineer and engineering manager who teaches what I practise every day. I train engineering teams in companies and teach students in schools, with the same approach: start from real cases and grow your skills in the areas that matter to you."
+  pitch: "A team to train or a module to fill? Send me the audience, the topic and the dates."
+  cta_primary: "Get in touch"
+  cta_secondary: "Bio & speaker kit"
+
+# ---------- Newsletter ----------
+newsletter:
+  tag: en
+  eyebrow: "Newsletter · ~1 / month"
+  title: "New material and posts in your inbox."
+  text: "No spam. Unsubscribe in one click. Prefer feeds?"
+  rss: "RSS works too."
+  placeholder: "you@example.com"
+  button: Subscribe
+  social_proof: ""                 # TODO Morgan: e.g. "Join 850 engineers & educators." once real
+  after_talk_eyebrow: "Liked this talk?"
+  after_talk_title: "Get the next one in your inbox, with the slides."
+
+# ---------- Interface labels ----------
+labels:
+  subscribe: Subscribe
+  toggle_theme: "Toggle dark mode"
+  language: Language
+  all_talks: "All talks"
+  all_courses: "All courses"
+  archive: Archive
+  back_to_talks: "← All talks"
+  latest_talk: "Latest talk"
+  recent_posts: "Recent posts"
+  previous: "← Previous"
+  next: "Next →"
+  specifications: Specifications
+  ref_date: "Ref · Date"
+  title: Title
+  event: Event
+  date: Date
+  length: Length
+  format: Format
+  audience: Audience
+  attendees: attendees
+  rating: Rating
+  period: Period
+  course: Course
+  students: students
+  resources: Resources
+  topics: Topics
+  revision_history: "Revision history"
+  video: Video
+  slides: Slides
+  code: Code
+  notes: "Notes & links"
+  watch: Watch
+  play: "Play recording"
+  min_read: "min read"
+  invite_talk: "Invite me to give this talk"
+  not_translated: "This page isn't available in French."
+  page_not_found: "Page not found"
+  offer_formats: "Formats"
+  offer_outcomes: "What you get"
+  recently_taught: "Recently taught"
+  back_to_courses: "← All courses"
+  back_to_blog: "← All posts"
+  materials: Materials
+  level: Level
+  institution: Institution
+  empty_talks: "The first talks are coming soon."
+  empty_courses: "The first courses are coming soon."
+  empty_posts: "The first posts are coming soon."
+  follow_rss: "Follow via RSS"
+  watch_on_youtube: "Watch on YouTube"
+
+footer:
+  built_with: "Built with Jekyll, hosted on GitHub Pages"

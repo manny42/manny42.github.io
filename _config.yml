@@ -1,0 +1,55 @@
+# Site settings. Texts and positioning per language live in _data/fr.yml and _data/en.yml.
+title: Morgan Faget
+author: Morgan Faget
+url: https://manny42.github.io
+baseurl: ""
+lang: fr
+
+# Buttondown username. The newsletter forms only appear once this is set.
+buttondown: ""
+
+# Footer links. Empty entries are hidden.
+social:
+  linkedin: ""
+  github: https://github.com/manny42
+  youtube: ""
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-redirect-from
+
+collections:
+  talks:
+    output: true
+  courses:
+    output: true
+
+exclude:
+  - _design
+  - _templates
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - new
+
+# Language and URL come from the folder, so content files never need to set them.
+defaults:
+  - scope: { path: "_talks/fr", type: talks }
+    values: { layout: talk, lang: fr, permalink: "/conferences/:title/" }
+  - scope: { path: "_talks/en", type: talks }
+    values: { layout: talk, lang: en, permalink: "/en/talks/:title/" }
+  - scope: { path: "_courses/fr", type: courses }
+    values: { layout: course, lang: fr, permalink: "/formations/:title/" }
+  - scope: { path: "_courses/en", type: courses }
+    values: { layout: course, lang: en, permalink: "/en/teaching/:title/" }
+  - scope: { path: "_posts/fr", type: posts }
+    values: { layout: post, lang: fr, permalink: "/blog/:title/" }
+  - scope: { path: "_posts/en", type: posts }
+    values: { layout: post, lang: en, permalink: "/en/blog/:title/" }

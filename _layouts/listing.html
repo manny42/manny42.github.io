@@ -1,0 +1,45 @@
+---
+layout: base
+---
+{%- comment -%}
+  Listing page for talks, courses or posts in the page's language.
+  Front matter: list (talks | courses | posts), n (section number)
+{%- endcomment -%}
+{%- assign t = site.data[page.lang] -%}
+{%- case page.list -%}
+  {%- when "talks" -%}{%- assign items = site.talks | where: "lang", page.lang | sort: "date" | reverse -%}{%- assign empty = t.labels.empty_talks -%}
+  {%- when "courses" -%}{%- assign items = site.courses | where: "lang", page.lang | sort: "order", "last" -%}{%- assign empty = t.labels.empty_courses -%}
+  {%- when "posts" -%}{%- assign items = site.posts | where: "lang", page.lang -%}{%- assign empty = t.labels.empty_posts -%}
+{%- endcase -%}
+
+<div class="sec pad"><span class="n">{{ page.n }}</span><h1 class="h2">{{ page.title }}</h1>{% if items.size > 0 %}<span class="mono dim">{{ items.size }}</span>{% endif %}</div>
+{%- if page.description %}<p class="offer-intro pad">{{ page.description }}</p>{% endif %}
+
+{{ content }}
+
+{%- if items.size == 0 %}
+  {%- unless page.list == "courses" %}<p class="empty pad">{{ empty }}</p>{% endunless %}
+{%- elsif page.list == "talks" %}
+  {%- assign years = items | group_by_exp: "x", "x.date | date: '%Y'" %}
+  {%- for y in years %}
+  <h2 class="subhead pad">{{ y.name }}</h2>
+  <ul class="rows talk-rows">{% for r in y.items %}{% include talk-row.html talk=r %}{% endfor %}</ul>
+  {%- endfor %}
+{%- elsif page.list == "courses" %}
+  <h2 class="subhead pad">{{ t.labels.recently_taught }}</h2>
+  <ul class="rows course-rows">{% for c in items %}{% include course-row.html course=c %}{% endfor %}</ul>
+{%- else %}
+  {%- assign years = items | group_by_exp: "x", "x.date | date: '%Y'" %}
+  {%- for y in years %}
+  <h2 class="subhead pad">{{ y.name }}</h2>
+  <ul class="rows post-rows pad">
+    {%- for p in y.items %}
+    {%- assign words = p.content | number_of_words -%}
+    {%- assign minutes = words | divided_by: 200 | at_least: 1 %}
+    <li><a href="{{ p.url | relative_url }}"><span class="mono dim">{{ p.date | date: "%Y-%m-%d" }} · {{ minutes }} {{ t.labels.min_read }}</span><h3>{{ p.title }}</h3><span class="dim">{{ p.description }}</span></a></li>
+    {%- endfor %}
+  </ul>
+  {%- endfor %}
+{%- endif %}
+
+{% include newsletter.html %}

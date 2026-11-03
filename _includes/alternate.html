@@ -1,0 +1,17 @@
+{%- comment -%}
+  Finds this page in the other language, matched by `ref`.
+  Sets alt_url (falls back to the other language's home) and alt_exists.
+{%- endcomment -%}
+{%- assign other = t.other_lang -%}
+{%- assign alt_exists = false -%}
+{%- assign alt_url = site.data[other].urls.home -%}
+{%- if page.ref -%}
+  {%- assign alt = site.pages | where: "ref", page.ref | where: "lang", other | first -%}
+  {%- unless alt -%}
+    {%- assign alt = site.documents | where: "ref", page.ref | where: "lang", other | first -%}
+  {%- endunless -%}
+  {%- if alt -%}
+    {%- assign alt_url = alt.url -%}
+    {%- assign alt_exists = true -%}
+  {%- endif -%}
+{%- endif -%}

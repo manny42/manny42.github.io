@@ -1,0 +1,12 @@
+---
+layout: base
+---
+{%- assign t = site.data[page.lang] -%}
+<section class="post-head pad">
+  {%- if page.eyebrow %}<span class="mono dim">{{ page.eyebrow }}</span>{% endif %}
+  <h1>{{ page.title }}</h1>
+  {%- if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
+</section>
+<article class="prose prose-post">
+  {{ content }}
+</article>

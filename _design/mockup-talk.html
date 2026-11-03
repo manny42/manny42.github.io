@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shipping fast without breaking things · Morgan Faget</title>
+  <meta name="color-scheme" content="light dark">
+  <!-- Mockup only: the real site self-hosts these two fonts as woff2 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+  <script>
+    (function () {
+      var t = localStorage.getItem("theme");
+      if (t) document.documentElement.dataset.theme = t;
+    })();
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="sheet pad">
+    <a class="wordmark" href="mockup-home.html">Morgan Faget <span class="mono">MF-42</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#"><i>01</i>Training</a>
+      <a href="#" aria-current="page"><i>02</i>Talks</a>
+      <a href="#"><i>03</i>Writing</a>
+      <a href="#"><i>04</i>About</a>
+    </nav>
+    <div class="header-actions">
+      <!-- Language switcher: links to the page with the same ref in the other language -->
+      <nav class="lang-switch" aria-label="Language"><span aria-current="true">EN</span><a href="#" hreflang="fr" lang="fr">FR</a></nav>
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <a class="btn btn-sm btn-primary" href="#subscribe">Subscribe</a>
+    </div>
+  </div>
+</header>
+
+<main class="sheet">
+  <div class="crumbs pad"><a href="mockup-home.html">← All talks</a></div>
+
+  <!-- Everything in this header comes from the talk file's front matter -->
+  <section class="talk-head">
+    <div class="pad">
+      <span class="mono dim">T-032 · Conference talk · English</span>
+      <h1>Shipping fast without breaking things</h1>
+      <p class="lead">How small teams can deploy dozens of times a day with feature flags, good tests and a culture that treats incidents as lessons.</p>
+    </div>
+    <div class="pad">
+      <table class="specs">
+        <caption>Specifications</caption>
+        <tr><th>Event</th><td><b>DevConf Paris</b></td></tr>
+        <tr><th>Date</th><td>Oct 14, 2026</td></tr>
+        <tr><th>Format</th><td>Main stage · 40 min</td></tr>
+        <tr><th>Audience</th><td class="num">~600</td></tr>
+        <tr><th>Rating</th><td class="num">4.8 <span class="mono dim">/ 5</span></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- Lite video embed: a static cover until clicked, so the page loads no YouTube JS -->
+  <div class="video" role="button" tabindex="0" aria-label="Play recording">
+    <div class="cover">
+      <div class="top"><span>T-032</span><span>DevConf Paris · 2026</span></div>
+      <div class="title">Shipping fast without breaking things</div>
+      <span class="dur">38:12</span>
+      <span class="play"></span>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- Everything in .prose is the Markdown body of the talk file -->
+    <article class="prose">
+      <h2><span class="n">1.0</span>What this talk covers</h2>
+      <p>Most teams slow down as they grow because every deploy feels risky. This talk walks through the habits that let my last team go from weekly releases to 30+ deploys a day without more incidents.</p>
+      <ul>
+        <li>Trunk-based development with short-lived branches</li>
+        <li>Feature flags as a release tool, not a config system</li>
+        <li>A test pyramid you can actually afford to run on every commit</li>
+        <li>Blameless incident reviews that change behaviour</li>
+      </ul>
+      <blockquote>"The deploy button should be the most boring button in the company."</blockquote>
+      <h2><span class="n">2.0</span>Links mentioned</h2>
+      <ul>
+        <li><a href="#">Accelerate</a>: Forsgren, Humble, Kim</li>
+        <li><a href="#">Demo repository</a> with the CI pipeline from the talk</li>
+        <li>The flag cleanup script: <code>scripts/stale-flags.sh</code></li>
+      </ul>
+      <h2><span class="n">3.0</span>Audience feedback</h2>
+      <p class="dim">Rated 4.8 / 5 by attendees. "Best practical talk of the day."</p>
+    </article>
+
+    <aside>
+      <div class="panel">
+        <h3>Resources</h3>
+        <a class="resource" href="#"><span class="ic">▶</span><span>Video recording<small>YouTube · 38 min</small></span></a>
+        <a class="resource" href="#"><span class="ic">PDF</span><span>Slides<small>2.4 MB · 42 slides</small></span></a>
+        <a class="resource" href="#"><span class="ic">&lt;/&gt;</span><span>Demo code<small>github.com/manny42</small></span></a>
+      </div>
+      <div class="panel">
+        <h3>Topics</h3>
+        <div class="tags"><a class="tag" href="#">devops</a><a class="tag" href="#">testing</a><a class="tag" href="#">culture</a></div>
+      </div>
+      <div class="panel">
+        <h3>Revision history</h3>
+        <table class="history">
+          <tr><th>Date</th><th>Event</th></tr>
+          <tr><td>10/2026</td><td>DevConf Paris (EN)</td></tr>
+          <tr><td>05/2026</td><td>Lyon JUG (FR)</td></tr>
+          <tr><td>02/2026</td><td>Internal tech day (FR)</td></tr>
+        </table>
+      </div>
+      <div class="panel">
+        <a class="btn btn-primary" href="#">Invite me to give this talk</a>
+      </div>
+    </aside>
+  </div>
+
+  <nav class="pager" aria-label="More talks">
+    <a href="#"><span class="mono dim">← Previous · T-031</span><strong>Git internals in 30 minutes</strong></a>
+    <a href="#"><span class="mono dim">Next · T-033 →</span><strong>Observability for humans</strong></a>
+  </nav>
+
+  <section class="invert pad" id="subscribe" style="margin-top:0">
+    <div>
+      <span class="mono caps">Liked this talk?</span>
+      <h2>Get the next one in your inbox, with the slides.</h2>
+    </div>
+    <form onsubmit="event.preventDefault()">
+      <input type="email" placeholder="you@example.com" aria-label="Email address" required>
+      <button class="btn btn-sig" type="submit">Subscribe</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <div class="sheet pad">
+    <span>© 2026 Morgan Faget · Built with Jekyll, hosted on GitHub Pages</span>
+    <nav aria-label="Social">
+      <a href="#">LinkedIn</a><a href="#">GitHub</a><a href="#">YouTube</a><a href="#">RSS</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("theme-toggle").addEventListener("click", function () {
+    var root = document.documentElement;
+    var dark = root.dataset.theme
+      ? root.dataset.theme === "dark"
+      : matchMedia("(prefers-color-scheme: dark)").matches;
+    var next = dark ? "light" : "dark";
+    var apply = function () { root.dataset.theme = next; localStorage.setItem("theme", next); };
+    document.startViewTransition ? document.startViewTransition(apply) : apply();
+  });
+</script>
+</body>
+</html>

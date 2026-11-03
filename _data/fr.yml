@@ -1,0 +1,188 @@
+# =========================================================
+# Version française : textes de l'interface + positionnement
+# Cible (premier jet) : entreprises qui cherchent un intervenant technique
+# pour former leurs équipes, et écoles qui cherchent un intervenant pour leurs étudiants.
+# Les lignes "TODO Morgan" sont à compléter ou valider : rien n'y a été inventé.
+# =========================================================
+
+lang: fr
+locale: fr_FR
+other_lang: en            # cible du sélecteur de langue
+
+# ---------- Métadonnées (SEO, partage) ----------
+meta:
+  title: "Morgan Faget · Formations et interventions techniques"
+  description: "Formateur et conférencier en ingénierie logicielle. Formations pour les équipes en entreprise, cours et interventions pour les écoles."
+  og_image: /assets/img/og-default-fr.png
+
+# ---------- Navigation ----------
+nav:
+  - { n: "01", label: Formations, url: /formations/ }
+  - { n: "02", label: Conférences, url: /conferences/ }
+  - { n: "03", label: Blog, url: /blog/ }
+  - { n: "04", label: "À propos", url: /a-propos/ }
+
+# Ordre des sections de l'accueil. Pour cette cible, l'offre de formation passe avant les talks.
+home_sections: [teaching, talks, writing, about]
+
+# Adresses des pages principales (liens, sélecteur de langue, flux RSS)
+urls: { home: /, talks: /conferences/, teaching: /formations/, blog: /blog/, about: /a-propos/, feed: /feed.xml }
+
+# ---------- Accueil : haut de page ----------
+hero:
+  eyebrow: "MF-42 · Formateur / Conférencier · Ingénierie logicielle"
+  title: "La technique,"
+  title_mark: "transmise."         # partie surlignée en vert
+  lead: "Formations et interventions techniques pour les équipes en entreprise et les étudiants en école. Des contenus concrets, des exemples techniques, avec les supports et le code fournis."
+  cta_primary: { label: "Demander une formation", url: "#contact" }
+  cta_secondary: { label: "Voir les formations", url: /formations/ }
+
+# Tableau "Caractéristiques". Les lignes avec `stat:` sont calculées depuis les fichiers.
+specs:
+  caption: Caractéristiques
+  rows:
+    - { label: "Personnes formées", stat: students }
+    - { label: "Formations données", stat: courses }
+    - { label: "Conférences", stat: talks }
+    - label: Publics
+      value: "Équipes tech en entreprise, étudiants en école d'ingénieurs et du numérique"
+    - label: Formats
+      value: "Atelier pratique de 1 à 3 jours, module de cours, masterclass, conférence interne"
+    - label: Domaines
+      value: "DevOps, Git, Architecture, Javascript/Typescript/Node.js, Python"
+    - label: Modalités
+      value: "Sur site ou à distance"
+    - label: Langues
+      value: "Français, anglais"
+
+venues:
+  label: "Ils m'ont fait intervenir"
+  show: [minesAles, yooz, hr-team]
+
+# ---------- Offre (section Formations de l'accueil + page /formations/) ----------
+offer:
+  title: "Formations & interventions"
+  intro: "Chaque intervention part de votre contexte : le niveau du public, vos outils, ce que les participants doivent savoir faire en sortant."
+  audiences:
+    - key: entreprises
+      ref: "OFFRE-E"
+      title: "Pour les entreprises"
+      pitch: "Faire monter une équipe en compétence sur un sujet précis, sans la sortir de son quotidien plus que nécessaire."
+      formats:
+        - "Atelier pratique intra-entreprise, 1 à 3 jours"
+        - "Formation sur mesure, construite sur votre stack"
+        - "Conférence interne ou tech day"
+      outcomes:
+        - "Exercices sur des cas proches de votre code"
+        - "Supports et dépôts de code laissés à l'équipe"
+        - "Bilan en fin de session"
+      cta: { label: "Demander un devis", subject: "Demande de formation pour une équipe" }
+    - key: ecoles
+      ref: "OFFRE-S"
+      title: "Pour les écoles"
+      pitch: "Un intervenant issu du terrain, qui enseigne par projets et sait tenir une classe."
+      formats:
+        - "Module ou cours sur un semestre"
+        - "Masterclass ou conférence pour une promo"
+        - "Workshop intensif, hackathon"
+        - "Jury, suivi de projets"
+      outcomes:
+        - "Syllabus, exercices et corrigés fournis"
+        - "Évaluation alignée sur les objectifs du module"
+        - "Expérience de classes de 30 élèves en TD"
+      cta: { label: "Proposer une intervention", subject: "Intervention dans notre école" }
+
+# ---------- Contact ----------
+contact:
+  email: contact@morganfaget.fr
+  subject: "Formation ou intervention"            # objet du mail du bouton de contact général
+  reply_time: "Je réponds sous deux jours ouvrés."
+  # Corps de mail prérempli : il aide l'interlocuteur à donner d'emblée ce dont tu as besoin pour chiffrer.
+  mail_body: |
+    Bonjour Morgan,
+
+    Organisation :
+    Public (nombre, niveau) :
+    Sujet souhaité :
+    Format et durée :
+    Dates envisagées :
+    Sur site (lieu) ou à distance :
+
+    Merci !
+
+# ---------- À propos (version courte de l'accueil) ----------
+about:
+  title: "Bonjour, je suis Morgan."
+  body: "Ingénieur logiciel et manager d'équipe technique, j'enseigne ce que je pratique au quotidien. J'interviens en entreprise pour former des équipes techniques et en école auprès des étudiants, avec la même idée : partir de cas réels et faire grandir vos capacités dans les sujets qui vous sont chers."
+  pitch: "Une équipe à former, un module à confier ? Envoyez-moi le public, le sujet et les dates."
+  cta_primary: "Me contacter"
+  cta_secondary: "Bio et kit intervenant"
+
+# ---------- Newsletter ----------
+newsletter:
+  tag: fr                          # tag Buttondown envoyé avec le formulaire
+  eyebrow: "Newsletter · environ 1 / mois"
+  title: "Les nouveaux supports et articles, par e-mail."
+  text: "Pas de spam, désinscription en un clic. Vous préférez les flux ?"
+  rss: "Le RSS marche aussi."
+  placeholder: "vous@exemple.fr"
+  button: "S'abonner"
+  social_proof: ""                 # ex. "Rejoignez 850 ingénieurs et enseignants." TODO Morgan: une fois les vrais chiffres connus
+  after_talk_eyebrow: "Ce talk vous a plu ?"
+  after_talk_title: "Recevez le prochain, avec les slides."
+
+# ---------- Libellés de l'interface ----------
+labels:
+  subscribe: "S'abonner"
+  toggle_theme: "Basculer le mode sombre"
+  language: Langue
+  all_talks: "Toutes les conférences"
+  all_courses: "Toutes les formations"
+  archive: Archives
+  back_to_talks: "← Toutes les conférences"
+  latest_talk: "Dernière conférence"
+  recent_posts: "Articles récents"
+  previous: "← Précédent"
+  next: "Suivant →"
+  specifications: Caractéristiques
+  ref_date: "Réf. · Date"
+  title: Titre
+  event: Événement
+  date: Date
+  length: Durée
+  format: Format
+  audience: Public
+  attendees: participants
+  rating: Note
+  period: Période
+  course: Formation
+  students: étudiants
+  resources: Ressources
+  topics: Sujets
+  revision_history: Historique
+  video: Vidéo
+  slides: Slides
+  code: Code
+  notes: "Notes et liens"
+  watch: Regarder
+  play: "Lire l'enregistrement"
+  min_read: "min de lecture"
+  invite_talk: "M'inviter pour ce talk"
+  not_translated: "Cette page n'existe pas en anglais."
+  page_not_found: "Page introuvable"
+  offer_formats: "Formats"
+  offer_outcomes: "Ce que vous obtenez"
+  recently_taught: "Formations récentes"
+  back_to_courses: "← Toutes les formations"
+  back_to_blog: "← Tous les articles"
+  materials: Supports
+  level: Niveau
+  institution: Établissement
+  empty_talks: "Les premières conférences arrivent bientôt."
+  empty_courses: "Les premières formations arrivent bientôt."
+  empty_posts: "Les premiers articles arrivent bientôt."
+  follow_rss: "Suivre via RSS"
+  watch_on_youtube: "Voir sur YouTube"
+
+footer:
+  built_with: "Construit avec Jekyll, hébergé sur GitHub Pages"
