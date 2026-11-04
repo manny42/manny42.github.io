@@ -45,9 +45,9 @@ specs:
     - label: Audiences
       value: "Engineering teams, students at engineering and tech schools"
     - label: Formats
-      value: "1–3 day hands-on workshop, semester course, masterclass, internal talk"
+      value: "1-3 day hands-on workshop, semester course, masterclass, internal talk"
     - label: Topics
-      value: "DevOps, Git, Architecture, JavaScript/TypeScript/Node.js, Python"
+      value: "IA generated code, SDD, DevOps, Git, Architecture, JavaScript/TypeScript/Node.js, Python"
     - label: Delivery
       value: "On-site or remote"
     - label: Languages

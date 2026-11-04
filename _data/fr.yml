@@ -49,7 +49,7 @@ specs:
     - label: Formats
       value: "Atelier pratique de 1 à 3 jours, module de cours, masterclass, conférence interne"
     - label: Domaines
-      value: "DevOps, Git, Architecture, Javascript/Typescript/Node.js, Python"
+      value: "IA génératrive de code, SDD, DevOps, Git, Architecture, Javascript/Typescript/Node.js, Python"
     - label: Modalités
       value: "Sur site ou à distance"
     - label: Langues
