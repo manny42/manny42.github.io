@@ -33,7 +33,7 @@ Ce que « qualité » veut dire pour un logiciel, et ce que coûte son absence.
 
 - Le coût de la non-qualité : bugs, temps de correction, dette technique, mais aussi perte de confiance des utilisateurs et difficulté à garder ses développeurs.
 - Spécifications fonctionnelles (le « quoi ») et *non-functional requirements* (le « comment ») : implicites, mais toujours attendus.
-- Quelques NFR : intégrité des données, maintenabilité, modifiabilité, tolérance aux pannes, résilience, robustesse, scalabilité, sécurité, performance.
+- Quelques NFR : intégrité des données, maintenabilité, modifiabilité...
 - Mesurer sans se tromper de cible : une métrique est un outil de suivi, pas un objectif.
 
 ## <span class="n">02</span> Clean code
