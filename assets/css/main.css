@@ -280,6 +280,7 @@ footer a:hover { color: var(--ink); }
   margin: 2rem 0; padding: 1.25rem 1.5rem; border-left: 6px solid var(--sig); background: var(--surface);
   font-weight: 500; font-size: 1.4rem; line-height: 1.3; letter-spacing: -.02em;
 }
+.prose blockquote p:last-child { margin-bottom: 0; }
 .prose code { font: .86em var(--font-mono); background: var(--surface); border: 1px solid var(--hair); padding: .05em .35em; }
 
 aside { align-self: start; position: sticky; top: 62px; }

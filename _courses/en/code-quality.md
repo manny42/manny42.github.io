@@ -33,8 +33,8 @@ What "quality" means for software, and what its absence costs.
 
 - The cost of poor quality: bugs, time spent fixing, technical debt, but also lost user trust and developers who leave.
 - Functional specifications (the "what") and non-functional requirements (the "how"): never written down, always expected.
-- NFRs one by one: data integrity, maintainability, modifiability, fault tolerance, resilience, robustness, scalability, security, performance.
-- Measuring without aiming at the wrong target: a metric is a tracking tool, not a goal.
+- A few NFRs: data integrity, maintainability, modifiability...
+- Measuring without aiming at the wrong target: a metric is a tracking tool, not something to create objectives for.
 
 ## <span class="n">02</span> Clean code
 
@@ -70,7 +70,7 @@ Why keep it simple when you can make it very, very complicated?
 
 - Interfaces as boundaries between components.
 - Hexagonal architecture: keep business logic independent from both the database and the API. Domain, application, driving and driven ports, infrastructure, presentation.
-- Gang of Four design patterns: Singleton, Factory, Builder, Prototype, Adapter, Composite, Decorator, Bridge, Template, Chain of responsibility, Observer, Visitor.
+- Gang of Four design patterns: Singleton, Factory, Builder...
 - SOLID principles.
 - Designing a REST API: constraints, HTTP verbs, status codes, resource naming, versioning, OpenAPI.
 

@@ -33,7 +33,7 @@ Ce que « qualité » veut dire pour un logiciel, et ce que coûte son absence.
 
 - Le coût de la non-qualité : bugs, temps de correction, dette technique, mais aussi perte de confiance des utilisateurs et difficulté à garder ses développeurs.
 - Spécifications fonctionnelles (le « quoi ») et *non-functional requirements* (le « comment ») : implicites, mais toujours attendus.
-- Les NFR un par un : intégrité des données, maintenabilité, modifiabilité, tolérance aux pannes, résilience, robustesse, scalabilité, sécurité, performance.
+- Quelques NFR : intégrité des données, maintenabilité, modifiabilité, tolérance aux pannes, résilience, robustesse, scalabilité, sécurité, performance.
 - Mesurer sans se tromper de cible : une métrique est un outil de suivi, pas un objectif.
 
 ## <span class="n">02</span> Clean code
@@ -50,7 +50,7 @@ Des règles simples pour écrire du code qui fonctionne, et surtout qui se lit.
 
 Si on génère le code, comment ne pas en perdre le contrôle ?
 
-- Ce qu'est un modèle de langage, et pourquoi le contexte change tout.
+- Ce qu'est un modèle de langage, et pourquoi le contexte est important.
 - Des règles écrites (fichiers Markdown), le TDD pour forcer une boucle de vérification.
 - Le développement piloté par la spécification (SDD) : le contrat d'abord, les tests et la documentation qui en découlent, avec Spec Kit comme exemple.
 
@@ -66,11 +66,11 @@ Tout le monde aime les avoir, personne n'aime les écrire.
 
 ## <span class="n">04</span> Architecture logicielle
 
-Pourquoi faire simple quand on peut faire très très compliqué.
+Pourquoi faire simple quand on peut faire très compliqué.
 
 - Les interfaces comme frontières entre composants.
 - Architecture hexagonale : isoler la logique métier de la base de données comme de l'API. Domaine, application, ports *driving* et *driven*, infrastructure, présentation.
-- Design patterns du *Gang of Four* : Singleton, Factory, Builder, Prototype, Adapter, Composite, Decorator, Bridge, Template, Chain of responsibility, Observer, Visitor.
+- Design patterns du *Gang of Four* : Singleton, Factory, Builder...
 - Les principes SOLID.
 - Concevoir une API REST : contraintes, verbes HTTP, codes de retour, nommage des ressources, versions, OpenAPI.
 
