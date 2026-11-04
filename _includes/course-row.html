@@ -3,7 +3,7 @@
 <li><div class="row">
   <span class="mono when">{{ r.ref }} · {{ r.period }}</span>
   <div><h3><a href="{{ r.url | relative_url }}">{{ r.title }}</a></h3><span class="dim">{{ r.institution }}</span></div>
-  <span class="dim where">{{ r.format }}{% if r.students %} · {{ r.class_size | default: r.students }} {{ t.labels.students }}{% endif %}</span>
+  <span class="dim where">{{ r.format }}{% if r.students %} · {{ r.class_size | default: r.students }} {{ r.students_label | default: t.labels.students }}{% endif %}</span>
   {%- if first_material %}
   <a class="btn btn-sm" href="{{ first_material.url | relative_url }}">{{ first_material.label }}</a>
   {%- else %}
