@@ -1,7 +1,7 @@
 # Site settings. Texts and positioning per language live in _data/fr.yml and _data/en.yml.
 title: Morgan Faget
 author: Morgan Faget
-url: https://manny42.github.io
+url: https://morganfaget.fr
 baseurl: ""
 lang: fr
 

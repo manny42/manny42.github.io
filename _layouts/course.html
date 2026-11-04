@@ -16,7 +16,7 @@ layout: base
       {%- if page.institution %}<tr><th>{{ t.labels.institution }}</th><td><b>{{ page.institution }}</b></td></tr>{% endif %}
       {%- if page.period %}<tr><th>{{ t.labels.period }}</th><td>{{ page.period }}</td></tr>{% endif %}
       {%- if page.format %}<tr><th>{{ t.labels.format }}</th><td>{{ page.format }}</td></tr>{% endif %}
-      {%- if page.students %}<tr><th>{{ t.labels.audience }}</th><td class="num">{{ page.students }} <span class="mono dim">{{ t.labels.students }}</span></td></tr>{% endif %}
+      {%- if page.students %}<tr><th>{{ t.labels.audience }}</th><td class="num">{{ page.class_size | default: page.students }} <span class="mono dim">{{ t.labels.students }}</span></td></tr>{% endif %}
       {%- if page.level %}<tr><th>{{ t.labels.level }}</th><td>{{ page.level }}</td></tr>{% endif %}
     </table>
   </div>

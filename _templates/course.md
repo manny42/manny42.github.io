@@ -6,6 +6,7 @@ institution: Établissement ou entreprise
 period: 2025–2026
 format: 2 jours              # e.g. "12 semaines", "Atelier de 2 jours"
 students: 30                 # used for the "people trained" total
+class_size: 20–30            # optional, shown instead of students on the page (e.g. size of one class)
 level: Intermédiaire         # optional
 summary: Une phrase qui résume la formation.
 materials:                   # optional
